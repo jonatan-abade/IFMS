@@ -7,6 +7,7 @@
     </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/18c5e2ec98.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
