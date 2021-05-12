@@ -1,40 +1,39 @@
 <?php
 require_once "app/model/Model.php";
 
-class Noticia extends Model
+class User extends Model
 {
-    function getAll()
+    function login($dados)
     {
-        $sql = "SELECT * FROM noticias";
-
-        $noticias = $this->db->query($sql);
-
-        return $noticias;
-    }
-
-    function find($id)
-    {
-        $sql = "SELECT * FROM noticias WHERE id = ?";
+        $sql = "SELECT * FROM users WHERE email = ? AND senha = ?";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $id);
+        $stmt->bindParam(1, $dados['email']);
+        $stmt->bindParam(2, $dados['senha']);
         $stmt->execute();
 
-        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $categoria;
+        if($user){
+            $_SESSION['userid'] = $user['id'];
+            $_SESSION['usernome'] = $user['nome'];
+        }else{
+            echo "erro ao logar";
+        }
     }
 
     function save($dados)
     {
-        $sql = "INSERT INTO noticias (titulo, texto, id_categoria) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(1, $dados['titulo']);
-        $stmt->bindParam(2, $dados['texto']);
-        $stmt->bindParam(3, $dados['categoria']);
+        $stmt->bindParam(1, $dados['nome']);
+        $stmt->bindParam(2, $dados['email']);
+        $stmt->bindParam(3, $dados['senha']);
 
         $stmt->execute();
+
+        return true;
     }
 
 

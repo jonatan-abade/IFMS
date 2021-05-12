@@ -7,19 +7,15 @@ class NoticiaController
     public function index()
     {
         $noticias = new Noticia;
-        $categorias = new Noticia;
 
         $noticias = $noticias->getAll();
-        $categorias = $categorias->getAll();
 
         include 'public/view/noticia/index.php';
     }
 
     public function create()
     {
-       
-        $categorias = new Noticia;
-
+        $categorias = new Categoria;
         $categorias = $categorias->getAll();
        
         include 'public/view/noticia/form.php';
@@ -31,7 +27,6 @@ class NoticiaController
         $noticia = new Noticia;
 
         $noticia->save($_POST);
-
         header("Location:" . URL . "noticia");
     }
 
@@ -40,6 +35,8 @@ class NoticiaController
         $id = $_GET['id'];
         $noticia = new Noticia;
         $noticia = $noticia->find($id);
+        $categorias = new Categoria;
+        $categorias = $categorias->getAll();
 
         include 'public/view/noticia/form.php';
     }

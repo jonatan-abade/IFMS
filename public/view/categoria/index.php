@@ -1,5 +1,7 @@
 <h1>Categoria</h1>
-<a href="categoria/create" class="btn btn-primary mb-3">Adicionar categoria</a>
+<?php if (isset($_SESSION['userid'])) { ?>
+    <a href="categoria/create" class="btn btn-primary mb-3">Adicionar categoria</a>
+<?php } ?>
 <table class="table table-dark table-striped">
     <thead>
         <tr>
@@ -14,9 +16,13 @@
                 <td><?= $key + 1 ?></td>
                 <td><?= $categoria['titulo'] ?></td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#mDeletCat<?= $categoria['id'] ?>">
-                        <i class="fas fa-trash"></i></button>
-                    <a href="categoria/edit?id=<?= $categoria['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <?php if (isset($_SESSION['userid'])) { ?>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#mDeletCat<?= $categoria['id'] ?>">
+                            <i class="fas fa-trash"></i></button>
+                        <a href="categoria/edit?id=<?= $categoria['id'] ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                    <?php } else {
+                        echo "Nada por agora";
+                    } ?>
 
                 </td>
                 <!-- Modal -->

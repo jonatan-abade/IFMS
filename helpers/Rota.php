@@ -1,8 +1,8 @@
 <?php
 
-$url = isset($_GET['url']) ? explode("/", $_GET['url']): 'array(1)';
+$url = isset($_GET['url']) ? explode("/", $_GET['url']) : array(1);
 
-$controller = ucfirst($url[0]);
+$controller = $url[0] == 1 ? 'Noticia' : ucfirst($url[0]);
 $metodo = isset($url[1]) ? $url[1] : 'index';
 $param = isset($url[2]) ? $url[2] : null;
 
